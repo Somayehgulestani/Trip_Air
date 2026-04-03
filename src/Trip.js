@@ -103,6 +103,7 @@ export default function Trip() {
     <>
       <HeroSection />
       <Flights />
+      <CityImages />
     </>
   );
 }
@@ -151,7 +152,7 @@ function HeroSection() {
 function Flights() {
   return (
     <>
-      <div className="flex flex-wrap justify-center bg-slate-500 gap-6 pt-32 ">
+      <div className="flex flex-wrap justify-center bg-slate-500 gap-6 pt-32 pb-10">
         <h2 className="w-full text-white text-3xl font-semibold text-center font-serif">
           Flights List
         </h2>
@@ -206,5 +207,39 @@ function Flights() {
         })}
       </div>
     </>
+  );
+}
+
+function CityImages() {
+  const cities = [
+    { name: "Balkh", images: "/cities/balkh-1.jpg" },
+    { name: "Herat", images: "/cities/herat.jpg" },
+    { name: "Balkh", images: "/cities/balkh-2.jpg" },
+    { name: "Kabul", images: "/cities/kabul-2.jpg" },
+    { name: "Mashhad", images: "/cities/mashhad.jpg" },
+    { name: "Kabul", images: "/cities/kabul-1.jpg" },
+  ];
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-10  mx-auto">
+      {cities.map((city, index) => (
+        <div
+          key={index}
+          className="relative overflow-hidden rounded-xl shadow-lg group "
+        >
+          <img
+            src={city.images}
+            alt={city.name}
+            className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+          />
+
+          <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition duration-300"></div>
+
+          <h2 className="absolute bottom-4 left-4 text-white text-xl font-bold opacity-0 group-hover:opacity-100 transition duration-300">
+            {city.name}
+          </h2>
+        </div>
+      ))}
+    </div>
   );
 }
