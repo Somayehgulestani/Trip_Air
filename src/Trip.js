@@ -110,39 +110,52 @@ export default function Trip() {
 
 function Header() {
   return (
-    <div className="fixed w-full z-10 bg-black/15">
-      <h1 className="text-4xl  text-slate-200 font-bold font-serif p-4 flex top-0">
+    <div className="fixed w-full z-10 bg-black/25 top-0 backdrop-blur-sm flex justify-between pr-5 ">
+      <h1 className="text-4xl  text-white font-bold font-serif p-3 flex top-0">
         <FaPlane className="w-10 h-10 bg-blue-100 rounded-full text-blue-600 text-xl p-1 transition-transform duration-500 hover:-translate-y-1 mr-2 animate-float" />
         SKY AIR
       </h1>
+      <div className="p-2 my-auto text-white font-medium  cursor-pointer md:flex">
+        <a className="ml-4 ">Home</a>
+        <a className="ml-4">About</a>
+        <a className="ml-4">Flights</a>
+        <a className="ml-4">Contact</a>
+      </div>
+      <div className="my-auto">
+        <button className="bg-blue-500 text-white font-semibold rounded-md   text-sm p-2 ">
+          Your Reservations
+        </button>
+      </div>
     </div>
   );
 }
 
 function HeroSection() {
   return (
-    <div className="relative ">
+    <div className="h-screen flex flex-col items-center justify-center ">
       <Header />
-      <div className="absolute  inset-0 bg-gradient-to-t from-black/30 to-black/10 "></div>
-      <div
-        className="h-screen  "
-        style={{
-          backgroundImage: `url('/airplane/airplane-4.jpg')`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className=" p-14 pt-56 ">
-          <h2 className="text-slate-700   text-6xl font-bold ">
-            Where Do You Want To Go?
-          </h2>
-          <h3
-            className="text-xl text-sky-50 font-semibold pl-2
+      <div className="relative w-5/6   rounded-3xl h-[80vh] overflow-hidden mt-16">
+        <div className="absolute  inset-0 bg-gradient-to-t from-black/30 to-black/10 "></div>
+        <div
+          className="h-[80vh]   "
+          style={{
+            backgroundImage: `url('/cities/herat.jpg')`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className=" p-14 my-auto w-1/2 flex flex-col gap-4 items-center  h-full">
+            <h2 className="text-white  text-6xl font-bold  ">
+              Where Do You Want To Go?
+            </h2>
+            <h3
+              className="text-xl  text-sky-50 font-semibold 
             "
-          >
-            We'll Find The Best Route-You Just Choose{" "}
-          </h3>
+            >
+              We'll Find The Best Route-You Just Choose{" "}
+            </h3>
+          </div>
         </div>
       </div>
     </div>
@@ -152,10 +165,16 @@ function HeroSection() {
 function Flights() {
   return (
     <>
-      <div className="flex flex-wrap justify-center bg-slate-500 gap-6 pt-32 pb-10">
+      <div className="flex flex-wrap justify-center bg-gradient-to-b from-blue-100 to-blue-300 gap-6 pt-12 pb-10">
         <h2 className="w-full text-white text-3xl font-semibold text-center font-serif">
           Flights List
         </h2>
+        <div className="w-full flex justify-center  gap-3 font-semibold">
+          <button className="p-1 rounded-lg  bg-white w-[50px]">All</button>
+          <button className="p-1 rounded-lg  bg-white">kabul</button>
+          <button className="p-1 rounded-lg  bg-white">Mazar Sharif</button>
+          <button className="p-1 rounded-lg  bg-white">Mashhad</button>
+        </div>
         {flightsList.map((items, index) => {
           return (
             <div key={index} className=" w-[440px] bg-slate-100 rounded-lg">
@@ -197,7 +216,7 @@ function Flights() {
                   </h3>
                 </div>
                 <div className="flex justify-center">
-                  <button className="bg-slate-500 text-white font-semibold rounded-md m-3  text-sm p-2 w-1/2">
+                  <button className="bg-slate-400 text-zinc-700 font-extrabold rounded-md m-3   p-2 w-1/2 ">
                     Buy Ticket
                   </button>
                 </div>
@@ -221,16 +240,16 @@ function CityImages() {
   ];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-10  mx-auto">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-10  mx-auto xl:w-5/6">
       {cities.map((city, index) => (
         <div
           key={index}
-          className="relative overflow-hidden rounded-xl shadow-lg group "
+          className="relative overflow-hidden rounded-xl shadow-lg group  "
         >
           <img
             src={city.images}
             alt={city.name}
-            className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+            className="w-full h-64  object-cover transition-transform duration-500 group-hover:scale-110  "
           />
 
           <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition duration-300"></div>
