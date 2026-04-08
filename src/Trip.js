@@ -1,4 +1,10 @@
-import { FaPlane, FaDollarSign, FaChair } from "react-icons/fa";
+import {
+  FaPlane,
+  FaDollarSign,
+  FaBullseye,
+  FaGlobe,
+  FaHandshake,
+} from "react-icons/fa";
 const flightsList = [
   {
     origin: "Herat",
@@ -139,18 +145,19 @@ function HeroSection() {
         <div
           className="h-[80vh]   "
           style={{
-            backgroundImage: `url('/cities/herat.jpg')`,
+            backgroundImage: `url('/airplane/airplane-1.jpg')`,
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
+            backgroundPosition: "right",
+            objectPosition: "center",
           }}
         >
-          <div className=" p-14 my-auto w-1/2 flex flex-col gap-4 items-center  h-full">
+          <div className=" p-12  w-1/2  flex flex-col gap-4  h-full">
             <h2 className="text-white  text-6xl font-bold  ">
               Where Do You Want To Go?
             </h2>
             <h3
-              className="text-xl  text-sky-50 font-semibold 
+              className="text-lg  text-white bg-black/30 rounded-md font-semibold p-2
             "
             >
               We'll Find The Best Route-You Just Choose{" "}
@@ -165,65 +172,80 @@ function HeroSection() {
 function Flights() {
   return (
     <>
-      <div className="flex flex-wrap justify-center bg-gradient-to-b from-blue-100 to-blue-300 gap-6 pt-12 pb-10">
-        <h2 className="w-full text-white text-3xl font-semibold text-center font-serif">
-          Flights List
-        </h2>
-        <div className="w-full flex justify-center  gap-3 font-semibold">
-          <button className="p-1 rounded-lg  bg-white w-[50px]">All</button>
-          <button className="p-1 rounded-lg  bg-white">kabul</button>
-          <button className="p-1 rounded-lg  bg-white">Mazar Sharif</button>
-          <button className="p-1 rounded-lg  bg-white">Mashhad</button>
+      <div className="bg-gradient-to-b from-blue-100 to-blue-300 pb-20">
+        <div className="flex flex-wrap justify-center  gap-6 pt-12 pb-10">
+          <h2 className="w-full text-gray-700 text-5xl font-bold text-center uppercase mb-6">
+            Flights
+          </h2>
+          <div className="w-full flex justify-center  gap-3 font-semibold">
+            <button className="p-1 rounded-lg  bg-blue-500 text-white w-[50px]">
+              All
+            </button>
+            <button className="p-2 rounded-lg  bg-blue-500 text-white">
+              kabul
+            </button>
+            <button className="p-2 rounded-lg  bg-blue-500 text-white">
+              MazarSharif
+            </button>
+            <button className="p-2 rounded-lg  bg-blue-500 text-white">
+              Mashhad
+            </button>
+          </div>
+          {flightsList.slice(1, 7).map((items, index) => {
+            return (
+              <div key={index} className=" w-[380px] bg-slate-100 rounded-lg">
+                <div className="flex justify-around mt-3">
+                  <h2 className="text-lg font-bold">{items.origin}</h2>
+                  <p className="text-2xl font-semibold ">⇀</p>
+                  <h2 className="text-lg font-bold">{items.destination}</h2>
+                </div>
+                <div>
+                  <div className="flex justify-around pt-3 ">
+                    <h3>
+                      Departure-Time:{" "}
+                      <span className="font-medium">
+                        {items.departureTime}
+                      </span>{" "}
+                    </h3>
+                    <h3>
+                      Landing-Time:{" "}
+                      <span className="font-medium">{items.landing}</span>{" "}
+                    </h3>
+                  </div>
+                  <div
+                    className="flex justify-between p-3 ml-2 mr-2"
+                    style={{
+                      marginRight: items.remaindingSeats <= 9 && "10px",
+                    }}
+                  >
+                    <h3>
+                      Price:{" "}
+                      <span className="font-medium">
+                        <FaDollarSign className="inline" />
+                        {items.price}
+                      </span>
+                    </h3>
+                    <h3>
+                      Remainding-Seats:{" "}
+                      <span className="font-medium">
+                        {" "}
+                        {items.remaindingSeats}
+                      </span>
+                    </h3>
+                  </div>
+                  <div className="flex justify-center">
+                    <button className="bg-slate-400 text-zinc-700 font-extrabold rounded-md m-3   p-2 w-1/2 hover:bg-blue-500 hover:text-white transition-colors duration-300  hover:scale-105">
+                      Buy Ticket
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
-        {flightsList.map((items, index) => {
-          return (
-            <div key={index} className=" w-[440px] bg-slate-100 rounded-lg">
-              <div className="flex justify-around mt-3">
-                <h2 className="text-lg font-bold">{items.origin}</h2>
-                <p className="text-2xl font-semibold ">⇀</p>
-                <h2 className="text-lg font-bold">{items.destination}</h2>
-              </div>
-              <div>
-                <div className="flex justify-around pt-3 ">
-                  <h3>
-                    Departure-Time:{" "}
-                    <span className="font-medium">
-                      {items.departureTime}
-                    </span>{" "}
-                  </h3>
-                  <h3>
-                    Landing-Time:{" "}
-                    <span className="font-medium">{items.landing}</span>{" "}
-                  </h3>
-                </div>
-                <div
-                  className="flex justify-between p-3 ml-6 mr-3"
-                  style={{ marginRight: items.remaindingSeats <= 9 && "22px" }}
-                >
-                  <h3>
-                    Price:{" "}
-                    <span className="font-medium">
-                      <FaDollarSign className="inline" />
-                      {items.price}
-                    </span>
-                  </h3>
-                  <h3>
-                    Remainding-Seats:{" "}
-                    <span className="font-medium">
-                      {" "}
-                      {items.remaindingSeats}
-                    </span>
-                  </h3>
-                </div>
-                <div className="flex justify-center">
-                  <button className="bg-slate-400 text-zinc-700 font-extrabold rounded-md m-3   p-2 w-1/2 ">
-                    Buy Ticket
-                  </button>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+        <button className="bg-white  font-bold rounded-md  p-2 w-[200px] hover:bg-white transition-colors duration-300  hover:scale-105 block mx-auto">
+          Show More --→
+        </button>
       </div>
     </>
   );
@@ -231,34 +253,85 @@ function Flights() {
 
 function CityImages() {
   const cities = [
-    { name: "Balkh", images: "/cities/balkh-1.jpg" },
+    // { name: "Balkh", images: "/cities/balkh-1.jpg" },
+    { name: "Mashhad", images: "/cities/mashhad.jpg" },
     { name: "Herat", images: "/cities/herat.jpg" },
     { name: "Balkh", images: "/cities/balkh-2.jpg" },
     { name: "Kabul", images: "/cities/kabul-2.jpg" },
-    { name: "Mashhad", images: "/cities/mashhad.jpg" },
-    { name: "Kabul", images: "/cities/kabul-1.jpg" },
+    // { name: "Kabul", images: "/cities/kabul-1.jpg" },
   ];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-10  mx-auto xl:w-5/6">
-      {cities.map((city, index) => (
-        <div
-          key={index}
-          className="relative overflow-hidden rounded-xl shadow-lg group  "
-        >
-          <img
-            src={city.images}
-            alt={city.name}
-            className="w-full h-64  object-cover transition-transform duration-500 group-hover:scale-110  "
-          />
+    <div className="bg-gradient-to-b from-gray-100 to-gray-300 rounded-lg shadow-md ">
+      <About />
 
-          <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition duration-300"></div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-10  mx-auto w-[80vw] h-[80vh] ">
+        {cities.map((city, index) => (
+          <div
+            key={index}
+            className={`relative overflow-hidden rounded-xl shadow-lg  group ${index === 2 && "lg:row-span-2 "} ${index == 3 && "lg:col-span-2 "}`}
+          >
+            <img
+              src={city.images}
+              alt={city.name}
+              className={`w-full   object-cover transition-transform h-full duration-500 group-hover:scale-110 ${index === 2 && " lg:h-full"} ${index === 3 && "lg:h-full"}`}
+            />
 
-          <h2 className="absolute bottom-4 left-4 text-white text-xl font-bold opacity-0 group-hover:opacity-100 transition duration-300">
-            {city.name}
-          </h2>
+            <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition duration-300"></div>
+
+            <h2 className="absolute bottom-4 left-4 text-white text-xl font-bold opacity-0 group-hover:opacity-100 transition duration-300">
+              {city.name}
+            </h2>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+function About() {
+  return (
+    <div className="w-[80vw] mx-auto p-10 ">
+      <h2 className="text-center text-4xl font-bold mb-10 uppercase">
+        About Us
+      </h2>
+      <p>
+        We are a fictional airline ticket booking platform focused on making
+        travel simple and accessible. Our services cover popular routes
+        including Herat, Mazar-e-Sharif, Kabul, and Mashhad. Our goal is to
+        provide a fast, reliable, and user-friendly experience where customers
+        can easily search, compare, and book flights at competitive prices. We
+        are committed to delivering convenience, trust, and quality service for
+        every journey.
+      </p>
+      <div className="flex justify-around mt-10 gap-6">
+        <div>
+          <p>
+            <FaBullseye className="text-red-500 w-[30px] h-[30px]" />
+            <span>
+              Our mission is to make flight booking booking simple, fast, and
+              accessible for everyone
+            </span>
+          </p>
         </div>
-      ))}
+        <div>
+          <p>
+            <FaGlobe className="text-blue-500 w-[30px] h-[30px] " />
+            <span>
+              We aim to become a trusted platform connecting major cities
+              like,Kabul, MazarSharif, Mashhand
+            </span>
+          </p>
+        </div>
+        <div>
+          <p>
+            <FaHandshake className="text-green-500 w-[30px] h-[30px]  " />
+            <span>
+              We believe in building long-term relationships with our customers
+              based on trust and satisfaction
+            </span>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
