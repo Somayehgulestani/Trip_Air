@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   FaPlane,
   FaDollarSign,
@@ -110,6 +111,7 @@ export default function Trip() {
       <HeroSection />
       <Flights />
       <CityImages />
+      <BookForm />
     </>
   );
 }
@@ -170,6 +172,15 @@ function HeroSection() {
 }
 
 function Flights() {
+  const [List, setList] = useState(flightsList);
+  const [showMore, setShowMore] = useState(false);
+  const [filterFlights, setFilterFlights] = useState("All");
+
+  const filterByCity =
+    filterFlights === "All"
+      ? List
+      : List.filter((v) => v.destination === filterFlights);
+
   return (
     <>
       <div className="bg-gradient-to-b from-blue-100 to-blue-300 pb-20">
@@ -177,74 +188,18 @@ function Flights() {
           <h2 className="w-full text-gray-700 text-5xl font-bold text-center uppercase mb-6">
             Flights
           </h2>
-          <div className="w-full flex justify-center  gap-3 font-semibold">
-            <button className="p-1 rounded-lg  bg-blue-500 text-white w-[50px]">
-              All
-            </button>
-            <button className="p-2 rounded-lg  bg-blue-500 text-white">
-              kabul
-            </button>
-            <button className="p-2 rounded-lg  bg-blue-500 text-white">
-              MazarSharif
-            </button>
-            <button className="p-2 rounded-lg  bg-blue-500 text-white">
-              Mashhad
-            </button>
-          </div>
-          {flightsList.slice(1, 7).map((items, index) => {
-            return (
-              <div key={index} className=" w-[380px] bg-slate-100 rounded-lg">
-                <div className="flex justify-around mt-3">
-                  <h2 className="text-lg font-bold">{items.origin}</h2>
-                  <p className="text-2xl font-semibold ">⇀</p>
-                  <h2 className="text-lg font-bold">{items.destination}</h2>
-                </div>
-                <div>
-                  <div className="flex justify-around pt-3 ">
-                    <h3>
-                      Departure-Time:{" "}
-                      <span className="font-medium">
-                        {items.departureTime}
-                      </span>{" "}
-                    </h3>
-                    <h3>
-                      Landing-Time:{" "}
-                      <span className="font-medium">{items.landing}</span>{" "}
-                    </h3>
-                  </div>
-                  <div
-                    className="flex justify-between p-3 ml-2 mr-2"
-                    style={{
-                      marginRight: items.remaindingSeats <= 9 && "10px",
-                    }}
-                  >
-                    <h3>
-                      Price:{" "}
-                      <span className="font-medium">
-                        <FaDollarSign className="inline" />
-                        {items.price}
-                      </span>
-                    </h3>
-                    <h3>
-                      Remainding-Seats:{" "}
-                      <span className="font-medium">
-                        {" "}
-                        {items.remaindingSeats}
-                      </span>
-                    </h3>
-                  </div>
-                  <div className="flex justify-center">
-                    <button className="bg-slate-400 text-zinc-700 font-extrabold rounded-md m-3   p-2 w-1/2 hover:bg-blue-500 hover:text-white transition-colors duration-300  hover:scale-105">
-                      Buy Ticket
-                    </button>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+          <CitiesFlightsOptions
+            onSetList={List}
+            onSetFilterFlights={setFilterFlights}
+          />
+          <FlightsCities showMore={showMore} filterByCity={filterByCity} />
         </div>
-        <button className="bg-white  font-bold rounded-md  p-2 w-[200px] hover:bg-white transition-colors duration-300  hover:scale-105 block mx-auto">
-          Show More --→
+        <button
+          className="bg-white  font-bold rounded-md  p-2 w-[200px] hover:bg-white transition-colors duration-300  hover:scale-105 block mx-auto"
+          onClick={() => setShowMore(!showMore)}
+        >
+          {showMore ? "Show Less" : "Show More"}
+          <span className="text-xl font-extrabold"> →</span>
         </button>
       </div>
     </>
@@ -256,7 +211,7 @@ function CityImages() {
     // { name: "Balkh", images: "/cities/balkh-1.jpg" },
     { name: "Mashhad", images: "/cities/mashhad.jpg" },
     { name: "Herat", images: "/cities/herat.jpg" },
-    { name: "Balkh", images: "/cities/balkh-2.jpg" },
+    { name: "MazarSharif", images: "/cities/balkh-2.jpg" },
     { name: "Kabul", images: "/cities/kabul-2.jpg" },
     // { name: "Kabul", images: "/cities/kabul-1.jpg" },
   ];
@@ -288,6 +243,7 @@ function CityImages() {
     </div>
   );
 }
+
 function About() {
   return (
     <div className="w-[80vw] mx-auto p-10 ">
@@ -332,6 +288,150 @@ function About() {
           </p>
         </div>
       </div>
+    </div>
+  );
+}
+
+function CitiesFlightsOptions({ onSetFilterFlights }) {
+  return (
+    <div className="w-full flex justify-center  gap-3 font-semibold">
+      <button
+        className="p-1 rounded-lg  bg-blue-900 text-white w-[50px]"
+        onClick={() => onSetFilterFlights("All")}
+      >
+        All
+      </button>
+      <button
+        className="p-2 rounded-lg  bg-blue-900 text-white"
+        onClick={() => onSetFilterFlights("Kabul")}
+      >
+        kabul
+      </button>
+      <button
+        className="p-2 rounded-lg  bg-blue-900 text-white"
+        onClick={() => onSetFilterFlights("Mazar")}
+      >
+        MazarSharif
+      </button>
+      <button
+        className="p-2 rounded-lg  bg-blue-900 text-white"
+        onClick={() => onSetFilterFlights("Mashhad")}
+      >
+        Mashhad
+      </button>
+    </div>
+  );
+}
+
+function FlightsCities({ filterByCity, showMore }) {
+  const [bookFlight, setBookFlights] = useState(false);
+  const flights = showMore ? filterByCity : filterByCity.slice(0, 3);
+  return (
+    <>
+      {flights.map((items, index) => {
+        return (
+          <div key={index} className=" w-[380px] bg-slate-100 rounded-lg">
+            <div className="flex justify-around mt-3">
+              <h2 className="text-lg font-bold">{items.origin}</h2>
+              <p className="text-2xl font-semibold ">⇀</p>
+              <h2 className="text-lg font-bold">{items.destination}</h2>
+            </div>
+            <div>
+              <div className="flex justify-around pt-3 ">
+                <h3>
+                  Departure-Time:{" "}
+                  <span className="font-medium">
+                    {items.departureTime}
+                  </span>{" "}
+                </h3>
+                <h3>
+                  Landing-Time:{" "}
+                  <span className="font-medium">{items.landing}</span>{" "}
+                </h3>
+              </div>
+              <div
+                className="flex justify-between p-3 ml-2 mr-2"
+                style={{
+                  marginRight: items.remaindingSeats <= 9 && "10px",
+                }}
+              >
+                <h3>
+                  Price:{" "}
+                  <span className="font-medium">
+                    <FaDollarSign className="inline" />
+                    {items.price}
+                  </span>
+                </h3>
+                <h3>
+                  Remainding-Seats:{" "}
+                  <span className="font-medium"> {items.remaindingSeats}</span>
+                </h3>
+              </div>
+              <div className="flex justify-center">
+                <button
+                  className="bg-slate-400 text-zinc-700 font-extrabold rounded-md m-3   p-2 w-1/2 hover:bg-blue-500 hover:text-white transition-colors duration-300  hover:scale-105"
+                  onClick={() => setBookFlights(true)}
+                >
+                  Buy Ticket
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </>
+  );
+}
+
+function BookForm() {
+  const numberOptions = Array.from({ length: 5 }, (_, i) => i + 1);
+  return (
+    <div className="w-2/3 bg-purple-200 m-5 p-4">
+      <div className="flex  justify-between">
+        <h3 className="font-medium  text-2xl mt-2 mb-4">Fill Out The Form</h3>
+        <button className="text-2xl font-bold  rounded-sm p-1">✕</button>
+      </div>
+      <form>
+        <label className="block text-sm font-semibold">Name:</label>
+        <input className="w-full p-1 mb-3"></input>
+        <label className="block text-sm font-semibold">Email</label>
+        <input className="w-full p-1 mb-3"></input>
+        <label className="block text-sm font-semibold">Phone:</label>
+        <input className="w-full p-1 mb-3"></input>
+        <label className="block text-sm font-semibold mb-3">Person:</label>
+        <div className="flex justify-between w-3/4 text-sm font-semibold">
+          <div>
+            <span>Adults: </span>
+            <select className="p-1 bg-black/10 rounded-md">
+              {numberOptions.map((number) => (
+                <option>{number}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <span>Children: </span>
+            <select className="p-1 bg-black/10 rounded-md">
+              {numberOptions.map((number) => (
+                <option>{number}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <span>Infants: </span>
+            <select className="p-1 bg-black/10 rounded-md">
+              {numberOptions.map((number) => (
+                <option>{number}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <button className="bg-white text-sm font-semibold rounded-xl p-2 w-[70px] m-5">
+          Book
+        </button>
+      </form>
+      <p>
+        total: <span>$0</span>
+      </p>
     </div>
   );
 }
