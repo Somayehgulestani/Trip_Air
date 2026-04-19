@@ -8,108 +8,116 @@ import {
   FaHandshake,
   FaSadCry,
   FaSadTear,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaClock,
+  FaMapMarkerAlt,
+  FaInstagram,
+  FaLinkedinIn,
+  FaTelegram,
+  FaWhatsapp,
 } from "react-icons/fa";
-// const flightsList = [
-//   {
-//     origin: "Herat",
-//     destination: "Mazar",
-//     departureTime: "8:00",
-//     landing: "9:50",
-//     price: 115,
-//     remaindingSeats: 10,
-//   },
-//   {
-//     origin: "Herat",
-//     destination: "Mazar",
-//     departureTime: "9:00",
-//     landing: "10:50",
-//     price: 110,
-//     remaindingSeats: 5,
-//   },
-//   {
-//     origin: "Herat",
-//     destination: "Kabul",
-//     departureTime: "10:00",
-//     landing: "11:30",
-//     price: 95,
-//     remaindingSeats: 0,
-//   },
-//   {
-//     origin: "Herat",
-//     destination: "Mashhad",
-//     departureTime: "10:00",
-//     landing: "11:00",
-//     price: 180,
-//     remaindingSeats: 3,
-//   },
-//   {
-//     origin: "Herat",
-//     destination: "Mazar",
-//     departureTime: "13:30",
-//     landing: "14:45",
-//     price: 131,
-//     remaindingSeats: 31,
-//   },
-//   {
-//     origin: "Herat",
-//     destination: "Kabul",
-//     departureTime: "14:00",
-//     landing: "15:30",
-//     price: 93,
-//     remaindingSeats: 10,
-//   },
-//   {
-//     origin: "Herat",
-//     destination: "Mashhad",
-//     departureTime: "14:00",
-//     landing: "14:50",
-//     price: 176,
-//     remaindingSeats: 7,
-//   },
-//   {
-//     origin: "Herat",
-//     destination: "Kabul",
-//     departureTime: "22:00",
-//     landing: "23:30",
-//     price: 89,
-//     remaindingSeats: 0,
-//   },
-//   {
-//     origin: "Herat",
-//     destination: "Kabul",
-//     departureTime: "18:30",
-//     landing: "19:45",
-//     price: 90,
-//     remaindingSeats: 8,
-//   },
-//   {
-//     origin: "Herat",
-//     destination: "Mashhad",
-//     departureTime: "18:30",
-//     landing: "16:45",
-//     price: 182,
-//     remaindingSeats: 18,
-//   },
-//   {
-//     origin: "Herat",
-//     destination: "Mazar",
-//     departureTime: "21:00",
-//     landing: "23:00",
-//     price: 122,
-//     remaindingSeats: 30,
-//   },
-//   {
-//     origin: "Herat",
-//     destination: "Mashhad",
-//     departureTime: "22:00",
-//     landing: "22:50",
-//     price: 168,
-//     remaindingSeats: 20,
-//   },
-// ];
+const flightsList = [
+  {
+    origin: "Herat",
+    destination: "Mazar",
+    departureTime: "8:00",
+    landing: "9:50",
+    price: 115,
+    remaindingSeats: 10,
+  },
+  {
+    origin: "Herat",
+    destination: "Mazar",
+    departureTime: "9:00",
+    landing: "10:50",
+    price: 110,
+    remaindingSeats: 5,
+  },
+  {
+    origin: "Herat",
+    destination: "Kabul",
+    departureTime: "10:00",
+    landing: "11:30",
+    price: 95,
+    remaindingSeats: 0,
+  },
+  {
+    origin: "Herat",
+    destination: "Mashhad",
+    departureTime: "10:00",
+    landing: "11:00",
+    price: 180,
+    remaindingSeats: 3,
+  },
+  {
+    origin: "Herat",
+    destination: "Mazar",
+    departureTime: "13:30",
+    landing: "14:45",
+    price: 131,
+    remaindingSeats: 31,
+  },
+  {
+    origin: "Herat",
+    destination: "Kabul",
+    departureTime: "14:00",
+    landing: "15:30",
+    price: 93,
+    remaindingSeats: 10,
+  },
+  {
+    origin: "Herat",
+    destination: "Mashhad",
+    departureTime: "14:00",
+    landing: "14:50",
+    price: 176,
+    remaindingSeats: 7,
+  },
+  {
+    origin: "Herat",
+    destination: "Kabul",
+    departureTime: "22:00",
+    landing: "23:30",
+    price: 89,
+    remaindingSeats: 0,
+  },
+  {
+    origin: "Herat",
+    destination: "Kabul",
+    departureTime: "18:30",
+    landing: "19:45",
+    price: 90,
+    remaindingSeats: 8,
+  },
+  {
+    origin: "Herat",
+    destination: "Mashhad",
+    departureTime: "18:30",
+    landing: "16:45",
+    price: 182,
+    remaindingSeats: 18,
+  },
+  {
+    origin: "Herat",
+    destination: "Mazar",
+    departureTime: "21:00",
+    landing: "23:00",
+    price: 122,
+    remaindingSeats: 30,
+  },
+  {
+    origin: "Herat",
+    destination: "Mashhad",
+    departureTime: "22:00",
+    landing: "22:50",
+    price: 168,
+    remaindingSeats: 20,
+  },
+];
 
 export default function Trip() {
-  const [List, setList] = useState([]);
+  const [List, setList] = useState(flightsList);
   const [errorMessage, setErrorMessage] = useState(false);
 
   // useEffect(() => {
@@ -124,31 +132,33 @@ export default function Trip() {
   //   };
   // }, []);
 
-  useEffect(() => {
-    async function loadFlights() {
-      try {
-        const res = await fetch(
-          "https://69e282ab3327837a15527356.mockapi.io/flights?destination=Herat",
-        );
-        const data = await res.json();
-        console.log(data);
+  // useEffect(() => {
+  //   async function loadFlights() {
+  //     try {
+  //       const res = await fetch(
+  //         "https://69e282ab3327837a15527356.mockapi.io/flights",
+  //       );
+  //       const data = await res.json();
+  //       console.log(data);
 
-        if (!res.ok) throw new Error("NETWORK ERROR");
+  //       if (!res.ok) throw new Error("NETWORK ERROR");
 
-        setList(data);
-      } catch (error) {
-        setErrorMessage(true);
-      }
-    }
+  //       setList(data);
+  //     } catch (error) {
+  //       setErrorMessage(true);
+  //     }
+  //   }
 
-    loadFlights();
-  }, []);
+  //   loadFlights();
+  // }, []);
 
   return (
     <>
       <HeroSection />
       <Flights List={List} errorMessage={errorMessage} />
       <CityImages />
+      <Contact />
+      <Footer />
     </>
   );
 }
@@ -157,7 +167,7 @@ function Header() {
   return (
     <div className="fixed w-full z-10 bg-black/25 top-0 backdrop-blur-sm flex justify-between pr-5 ">
       <h1 className="text-4xl  text-white font-bold font-serif p-3 flex top-0">
-        <FaPlane className="w-10 h-10 bg-blue-100 rounded-full text-blue-600 text-xl p-1 transition-transform duration-500 hover:-translate-y-1 mr-2 animate-float" />
+        <FaPlane className="w-10 h-10 bg-blue-100 rounded-full text-violet-900 text-xl p-1 transition-transform duration-500 hover:-translate-y-1 mr-2 animate-float" />
         SKY AIR
       </h1>
       <div className="p-2 my-auto text-white font-medium  cursor-pointer md:flex">
@@ -167,7 +177,7 @@ function Header() {
         <a className="ml-4">Contact</a>
       </div>
       <div className="my-auto">
-        <button className="bg-blue-500 text-white font-semibold rounded-md   text-sm p-2 ">
+        <button className="bg-purple-800 text-white font-semibold rounded-md   text-sm p-2 ">
           Your Reservations
         </button>
       </div>
@@ -177,7 +187,10 @@ function Header() {
 
 function HeroSection() {
   return (
-    <div className="h-screen flex flex-col items-center justify-center ">
+    <div
+      className="h-screen flex flex-col items-center justify-center "
+      id="heroSection"
+    >
       <Header />
       <div className="relative w-5/6   rounded-3xl h-[80vh] overflow-hidden mt-16">
         <div className="absolute  inset-0 bg-gradient-to-t from-black/30 to-black/10 "></div>
@@ -254,7 +267,7 @@ function CityImages() {
   ];
 
   return (
-    <div className="bg-gradient-to-b from-gray-100 to-gray-300 rounded-lg shadow-md ">
+    <section className="bg-gradient-to-b from-gray-100 to-gray-300 rounded-lg shadow-md ">
       <About />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-10  mx-auto w-[80vw] h-[80vh] ">
@@ -277,7 +290,7 @@ function CityImages() {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -331,7 +344,7 @@ function About() {
 
 function CitiesFlightsOptions({ onSetFilterFlights }) {
   return (
-    <div className="w-full flex justify-center  gap-3 font-semibold">
+    <div className="w-full flex justify-center mb-12  gap-3 font-semibold">
       <button
         className="p-1 rounded-lg  bg-gradient-to-b from-violet-300 to-violet-500 text-white w-[50px] "
         onClick={() => onSetFilterFlights("All")}
@@ -377,11 +390,11 @@ function FlightsCities({ filterByCity, showMore }) {
   }
 
   return (
-    <div className=" relative">
+    <div className="flex flex-wrap gap-3 justify-center relative">
       {flights.map((items, index) => {
         return (
           <div key={index} className=" w-[380px] bg-slate-100 rounded-lg">
-            <div className="flex justify-around mt-3">
+            <div className="flex justify-around mt-4 pt-2">
               <h2 className="text-lg font-bold">{items.origin}</h2>
               <p className="text-2xl font-semibold ">⇀</p>
               <h2 className="text-lg font-bold">{items.destination}</h2>
@@ -417,9 +430,10 @@ function FlightsCities({ filterByCity, showMore }) {
                   <span className="font-medium"> {items.remaindingSeats}</span>
                 </h3>
               </div>
+
               <div className="flex justify-center">
                 <button
-                  className="bg-slate-400 text-zinc-700 font-extrabold rounded-md m-3   p-2 w-1/2 hover:bg-blue-500 hover:text-white transition-colors duration-300  hover:scale-105"
+                  className="bg-purple-300 text-zinc-700 font-bold rounded-md m-3   p-2 w-1/2 hover:bg-purple-800 hover:text-white transition-colors duration-300  hover:scale-105"
                   onClick={() => handdleBookFlight(index)}
                 >
                   Buy Ticket
@@ -468,7 +482,7 @@ function BookForm({ onSetBookFlights }) {
   console.log(booked);
 
   return (
-    <div className="w-[400px] bg-purple-200 m-5 p-4 mx-auto rounded-lg absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
+    <div className="w-[400px] bg-purple-300 m-5 p-4 mx-auto rounded-lg absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
       <FormHeadline onSetBookFlights={onSetBookFlights} />
       <form>
         <FormFields
@@ -569,7 +583,7 @@ function NumberOfPeople({
       <label className="block text-sm font-semibold mb-2 mt-2">
         Number of Person:
       </label>
-      <div className="flex justify-between  text-sm font-semibold">
+      <div className="flex   text-sm font-semibold">
         <div>
           <span>Adults: </span>
           <select
@@ -582,19 +596,8 @@ function NumberOfPeople({
             ))}
           </select>
         </div>
-        <div>
-          <span>Children: </span>
-          <select
-            className="p-1 bg-black/10 rounded-md w-20 "
-            value={children}
-            onChange={(e) => setChildren(e.target.value)}
-          >
-            {numberOptions.map((number) => (
-              <option>{number}</option>
-            ))}
-          </select>
-        </div>
-        <div>
+
+        <div className="ml-3">
           <span>Infants: </span>
           <select
             className="p-1 bg-black/10 rounded-md w-20"
@@ -641,6 +644,125 @@ function ErrorMessage() {
       </h2>
       <p className=" text-3xl font-semibold ">NETWORK ERROR!</p>
       <small>Please Check Your Network</small>
+    </div>
+  );
+}
+
+function Contact() {
+  // <section>
+  //   <iframe
+  //     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d573.605992798156!2d62.20790490181604!3d34.347892703863046!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f3ce7001e9446d3%3A0x7180fb40c126c69c!2z2LTYsdqp2Kog2KrZiNix2LPYqtuMINiz24zYp9it2KrbjCDZiNiv2LHZhdin2YbbjCDYrNiy24zYsdmHINiz2YTYp9mF2Ko!5e0!3m2!1sfa!2s!4v1776580643805!5m2!1sfa!2s"
+  //     width=""
+  //     height="450"
+  //     style={{ border: 0 }}
+  //     allowFullScreen=""
+  //     loading="lazy"
+  //     referrerPolicy="no-referrer-when-downgrade"
+  //   ></iframe>
+  //   "
+  // </section>
+
+  return (
+    <section className="bg-white py-16 px-4 md:px-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-slate-800 mb-2">CONTACT US</h2>
+          <p className="text-slate-500">
+            We answer your questions about flights.
+          </p>
+        </div>
+
+        <div className=" grid grid-cols-1  md:grid-cols-2 gap-10 ">
+          <div className="  bg-slate-50 p-8 rounded-2xl shadow-sm grid grid-cols-1 gap-3 sm:grid-cols-2 ">
+            <div className="flex items-center gap-4 bg-violet-100 p-2 rounded-lg h-full ">
+              <div className="bg-white p-3 rounded-lg text-purple-700">
+                <FaMapMarkerAlt size={20} />
+              </div>
+              <div>
+                <p className="font-medium text-slate-800">Center Address</p>
+                <p className="text-slate-600 text-sm" dir="ltr">
+                  Afghanistan, Herat, Main Road, Asia Air Building
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 bg-violet-100 p-2 rounded-lg h-full ">
+              <div className="bg-white p-3 rounded-lg text-purple-700">
+                <FaPhoneAlt size={20} />
+              </div>
+              <div>
+                <p className="font-medium text-slate-800">Contact Number</p>
+                <p className="text-slate-600 text-sm" dir="ltr">
+                  +93 700 000 000
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 bg-violet-100 p-2 rounded-lg h-full ">
+              <div className="bg-white p-3 rounded-lg text-purple-700">
+                <FaEnvelope size={20} />
+              </div>
+              <div>
+                <p className="font-medium text-slate-800">Support Email</p>
+                <p className="text-slate-600 text-sm">info@asiasair.com</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 bg-violet-100 p-2 rounded-lg h-full ">
+              <div className="bg-white p-3 rounded-lg text-purple-700">
+                <FaClock size={20} />
+              </div>
+              <div>
+                <p className="font-medium text-slate-800">Working Hours</p>
+                <p className="text-slate-600 text-sm">
+                  Every Day : 8:00AM To 8:00PM
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="w-full h-[400px] rounded-2xl  shadow-md border-4 border-white">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d573.605992798156!2d62.20790490181604!3d34.347892703863046!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f3ce7001e9446d3%3A0x7180fb40c126c69c!2z2LTYsdqp2Kog2KrZiNix2LPYqtuMINiz24zYp9it2KrbjCDZiNiv2LHZhdin2YbbjCDYrNiy24zYsdmHINiz2YTYp9mF2Ko!5e0!3m2!1sfa!2s!4v1776580643805!5m2!1sfa!2s"
+              className="w-full"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <div className=" flex justify-between items-center bg-gradient-to-b from-violet-200 to-violet-500">
+      <p className="text-white font-bold text-2xl p-5 flex items-center gap-2">
+        <a className="cursor-pointer" href="heroSection">
+          {" "}
+          <FaPlane className="w-10 h-10 bg-blue-100 rounded-full text-violet-900 text-xl p-1 my-auto inline-block mr-2 cursor-pointer" />
+          SKY AIR
+        </a>
+      </p>
+
+      <div className="text-white flex w-1/2 justify-end gap-4 p-5">
+        <p>
+          <FaInstagram size={25} />
+        </p>
+        <p>
+          <FaTelegram size={25} />
+        </p>
+        <p>
+          <FaLinkedinIn size={25} />
+        </p>
+        <p>
+          <FaWhatsapp size={25} />
+        </p>
+      </div>
     </div>
   );
 }
