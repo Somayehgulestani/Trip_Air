@@ -17,155 +17,156 @@ import {
   FaTelegram,
   FaWhatsapp,
 } from "react-icons/fa";
-const flightsList = [
-  {
-    origin: "Herat",
-    destination: "Mazar",
-    departureTime: "8:00",
-    landing: "9:50",
-    price: 115,
-    remaindingSeats: 10,
-  },
-  {
-    origin: "Herat",
-    destination: "Mazar",
-    departureTime: "9:00",
-    landing: "10:50",
-    price: 110,
-    remaindingSeats: 5,
-  },
-  {
-    origin: "Herat",
-    destination: "Kabul",
-    departureTime: "10:00",
-    landing: "11:30",
-    price: 95,
-    remaindingSeats: 0,
-  },
-  {
-    origin: "Herat",
-    destination: "Mashhad",
-    departureTime: "10:00",
-    landing: "11:00",
-    price: 180,
-    remaindingSeats: 3,
-  },
-  {
-    origin: "Herat",
-    destination: "Mazar",
-    departureTime: "13:30",
-    landing: "14:45",
-    price: 131,
-    remaindingSeats: 31,
-  },
-  {
-    origin: "Herat",
-    destination: "Kabul",
-    departureTime: "14:00",
-    landing: "15:30",
-    price: 93,
-    remaindingSeats: 10,
-  },
-  {
-    origin: "Herat",
-    destination: "Mashhad",
-    departureTime: "14:00",
-    landing: "14:50",
-    price: 176,
-    remaindingSeats: 7,
-  },
-  {
-    origin: "Herat",
-    destination: "Kabul",
-    departureTime: "22:00",
-    landing: "23:30",
-    price: 89,
-    remaindingSeats: 0,
-  },
-  {
-    origin: "Herat",
-    destination: "Kabul",
-    departureTime: "18:30",
-    landing: "19:45",
-    price: 90,
-    remaindingSeats: 8,
-  },
-  {
-    origin: "Herat",
-    destination: "Mashhad",
-    departureTime: "18:30",
-    landing: "16:45",
-    price: 182,
-    remaindingSeats: 18,
-  },
-  {
-    origin: "Herat",
-    destination: "Mazar",
-    departureTime: "21:00",
-    landing: "23:00",
-    price: 122,
-    remaindingSeats: 30,
-  },
-  {
-    origin: "Herat",
-    destination: "Mashhad",
-    departureTime: "22:00",
-    landing: "22:50",
-    price: 168,
-    remaindingSeats: 20,
-  },
-];
+import { useCheckNetwork } from "./useCheckNetwork";
+// const flightsList = [
+//   {
+//     origin: "Herat",
+//     destination: "Mazar",
+//     departureTime: "8:00",
+//     landing: "9:50",
+//     price: 115,
+//     remaindingSeats: 10,
+//   },
+//   {
+//     origin: "Herat",
+//     destination: "Mazar",
+//     departureTime: "9:00",
+//     landing: "10:50",
+//     price: 110,
+//     remaindingSeats: 5,
+//   },
+//   {
+//     origin: "Herat",
+//     destination: "Kabul",
+//     departureTime: "10:00",
+//     landing: "11:30",
+//     price: 95,
+//     remaindingSeats: 0,
+//   },
+//   {
+//     origin: "Herat",
+//     destination: "Mashhad",
+//     departureTime: "10:00",
+//     landing: "11:00",
+//     price: 180,
+//     remaindingSeats: 3,
+//   },
+//   {
+//     origin: "Herat",
+//     destination: "Mazar",
+//     departureTime: "13:30",
+//     landing: "14:45",
+//     price: 131,
+//     remaindingSeats: 31,
+//   },
+//   {
+//     origin: "Herat",
+//     destination: "Kabul",
+//     departureTime: "14:00",
+//     landing: "15:30",
+//     price: 93,
+//     remaindingSeats: 10,
+//   },
+//   {
+//     origin: "Herat",
+//     destination: "Mashhad",
+//     departureTime: "14:00",
+//     landing: "14:50",
+//     price: 176,
+//     remaindingSeats: 7,
+//   },
+//   {
+//     origin: "Herat",
+//     destination: "Kabul",
+//     departureTime: "22:00",
+//     landing: "23:30",
+//     price: 89,
+//     remaindingSeats: 0,
+//   },
+//   {
+//     origin: "Herat",
+//     destination: "Kabul",
+//     departureTime: "18:30",
+//     landing: "19:45",
+//     price: 90,
+//     remaindingSeats: 8,
+//   },
+//   {
+//     origin: "Herat",
+//     destination: "Mashhad",
+//     departureTime: "18:30",
+//     landing: "16:45",
+//     price: 182,
+//     remaindingSeats: 18,
+//   },
+//   {
+//     origin: "Herat",
+//     destination: "Mazar",
+//     departureTime: "21:00",
+//     landing: "23:00",
+//     price: 122,
+//     remaindingSeats: 30,
+//   },
+//   {
+//     origin: "Herat",
+//     destination: "Mashhad",
+//     departureTime: "22:00",
+//     landing: "22:50",
+//     price: 168,
+//     remaindingSeats: 20,
+//   },
+// ];
 
 export default function Trip() {
-  const [List, setList] = useState(flightsList);
+  const [List, setList] = useState([]);
   const [errorMessage, setErrorMessage] = useState(false);
 
-  // useEffect(() => {
-  //   const handleStatus = () => console.log("changed status");
+  const [isOffline, setIsOffline] = useState(false);
 
-  //   window.addEventListener("offline", handleStatus);
-  //   window.addEventListener("online", handleStatus);
+  const { isOnline, setIsOnline } = useCheckNetwork();
 
-  //   return () => {
-  //     window.addEventListener("offline", handleStatus);
-  //     window.addEventListener("online", handleStatus);
-  //   };
-  // }, []);
+  useEffect(() => {
+    async function loadFlights() {
+      try {
+        const res = await fetch(
+          "https://69e282ab3327837a15527356.mockapi.io/flights",
+        );
+        const data = await res.json();
+        console.log(data);
 
-  // useEffect(() => {
-  //   async function loadFlights() {
-  //     try {
-  //       const res = await fetch(
-  //         "https://69e282ab3327837a15527356.mockapi.io/flights",
-  //       );
-  //       const data = await res.json();
-  //       console.log(data);
+        if (!res.ok) throw new Error("NETWORK ERROR");
 
-  //       if (!res.ok) throw new Error("NETWORK ERROR");
+        setList(data);
+      } catch (error) {
+        setErrorMessage(true);
+      }
+    }
 
-  //       setList(data);
-  //     } catch (error) {
-  //       setErrorMessage(true);
-  //     }
-  //   }
-
-  //   loadFlights();
-  // }, []);
+    loadFlights();
+  }, []);
 
   return (
     <>
       <HeroSection />
-      <Flights List={List} errorMessage={errorMessage} />
+      <Flights
+        List={List}
+        errorMessage={errorMessage}
+        onSetIsOffline={setIsOffline}
+        onSetIsOline={setIsOnline}
+      />
+      {!isOnline && isOffline && <NetworkStatus isOnline={isOnline} />}
+      {!isOnline && !isOffline && <NetworkStartus2 />}
       <CityImages />
       <Contact />
       <Footer />
+      {/* <Reservations /> */}
     </>
   );
 }
 
 function Header() {
   return (
-    <div className="fixed w-full z-10 bg-black/25 top-0 backdrop-blur-sm flex justify-between pr-5 ">
+    <div className="fixed w-full z-50 bg-black/25 top-0 backdrop-blur-sm flex justify-between pr-5 ">
       <h1 className="text-4xl  text-white font-bold font-serif p-3 flex top-0">
         <FaPlane className="w-10 h-10 bg-blue-100 rounded-full text-violet-900 text-xl p-1 transition-transform duration-500 hover:-translate-y-1 mr-2 animate-float" />
         SKY AIR
@@ -221,9 +222,10 @@ function HeroSection() {
   );
 }
 
-function Flights({ List, errorMessage }) {
+function Flights({ List, errorMessage, onSetIsOffline, onSetIsOline }) {
   const [showMore, setShowMore] = useState(false);
   const [filterFlights, setFilterFlights] = useState("All");
+  const [alert, setAlert] = useState(false);
 
   const filterByCity =
     filterFlights === "All"
@@ -242,7 +244,15 @@ function Flights({ List, errorMessage }) {
             onSetFilterFlights={setFilterFlights}
           />
           {errorMessage && <ErrorMessage />}
-          <FlightsCities showMore={showMore} filterByCity={filterByCity} />
+          <FlightsCities
+            showMore={showMore}
+            filterByCity={filterByCity}
+            setAlert={setAlert}
+            List={List}
+            onSetIsOffline={onSetIsOffline}
+            onSetIsOline={onSetIsOline}
+          />
+          {alert && <NoSeatAlert setAlert={setAlert} />}
         </div>
         <button
           className="bg-white  font-bold rounded-md  p-2 w-[200px]  transition-colors duration-300  hover:scale-105 block mx-auto"
@@ -373,19 +383,29 @@ function CitiesFlightsOptions({ onSetFilterFlights }) {
   );
 }
 
-function FlightsCities({ filterByCity, showMore }) {
+function FlightsCities({
+  filterByCity,
+  showMore,
+  setAlert,
+  List,
+  onSetIsOline,
+  onSetIsOffline,
+}) {
+  const [selectedId, setSelectedId] = useState(null);
   const [bookFlight, setBookFlights] = useState(false);
-  const [alert, setAlert] = useState(false);
   const flights = showMore ? filterByCity : filterByCity.slice(0, 3);
 
-  function handdleBookFlight(index) {
+  function handdleBookFlight(index, id) {
+    setSelectedId(id);
     const remaindingSeat = flights[index].remaindingSeats;
     if (remaindingSeat >= 1) {
       setAlert(false);
       setBookFlights(true);
+      onSetIsOffline(true);
     } else {
       setBookFlights(false);
       setAlert(true);
+      onSetIsOffline(false);
     }
   }
 
@@ -434,7 +454,7 @@ function FlightsCities({ filterByCity, showMore }) {
               <div className="flex justify-center">
                 <button
                   className="bg-purple-300 text-zinc-700 font-bold rounded-md m-3   p-2 w-1/2 hover:bg-purple-800 hover:text-white transition-colors duration-300  hover:scale-105"
-                  onClick={() => handdleBookFlight(index)}
+                  onClick={() => handdleBookFlight(index, items.id)}
                 >
                   Buy Ticket
                 </button>
@@ -443,25 +463,38 @@ function FlightsCities({ filterByCity, showMore }) {
           </div>
         );
       })}
-      {bookFlight && <BookForm onSetBookFlights={setBookFlights} />}
-      {alert && <NoSeatAlert onSetAlert={setAlert} />}
+      {bookFlight && (
+        <BookForm
+          onSetBookFlights={setBookFlights}
+          List={List}
+          selectedId={selectedId}
+          onSetIsOline={onSetIsOline}
+          onSetIsOffline={onSetIsOffline}
+        />
+      )}
     </div>
   );
 }
 
-function BookForm({ onSetBookFlights }) {
+function BookForm({
+  onSetBookFlights,
+  List,
+  selectedId,
+  onSetIsOline,
+  onSetIsOffline,
+}) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [adults, setAdults] = useState(1);
-  const [children, setChildren] = useState(0);
   const [infants, setInfants] = useState(0);
+  const [total, setTotal] = useState(0);
   const [booked, setBooked] = useState([]);
   const [isActive, setIsAcrive] = useState(false);
-  console.log(phone);
 
+  useCheckNetwork();
   function handleBooked(e) {
     e.preventDefault();
-
+    onSetIsOffline(true);
     if (name.length < 3) {
       setIsAcrive(true);
     } else if (phone.length !== 10) {
@@ -473,8 +506,8 @@ function BookForm({ onSetBookFlights }) {
           name: name,
           phone: phone,
           adults: adults,
-          children: children,
           infants: infants,
+          totalPrice: total,
         },
       ]);
     }
@@ -482,37 +515,52 @@ function BookForm({ onSetBookFlights }) {
   console.log(booked);
 
   return (
-    <div className="w-[400px] bg-purple-300 m-5 p-4 mx-auto rounded-lg absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
-      <FormHeadline onSetBookFlights={onSetBookFlights} />
-      <form>
-        <FormFields
-          name={name}
-          setName={setName}
-          phone={phone}
-          setPhone={setPhone}
-          isActive={isActive}
-        />
-        <NumberOfPeople
-          adults={adults}
-          setAdults={setAdults}
-          children={children}
-          setChildren={setChildren}
-          infants={infants}
-          setInfants={setInfants}
-        />
-        <TotalPrice />
-        <button
-          className="bg-white text-sm font-semibold rounded-xl p-2 w-full mt-8  "
-          onClick={(e) => handleBooked(e)}
-        >
-          Book
-        </button>
-      </form>
+    <div className="fixed inset-0 bg-black/25 backdrop-blur-sm flex items-center justify-center z-10">
+      <div className="w-[400px] bg-purple-300 m-5 p-4 mx-auto rounded-lg absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
+        <form>
+          <FormHeadline
+            onSetBookFlights={onSetBookFlights}
+            onSetIsOffline={onSetIsOffline}
+          />
+
+          <FormFields
+            name={name}
+            setName={setName}
+            phone={phone}
+            setPhone={setPhone}
+            isActive={isActive}
+          />
+          <NumberOfPeople
+            adults={adults}
+            setAdults={setAdults}
+            infants={infants}
+            setInfants={setInfants}
+          />
+          <TotalPrice
+            selectedId={selectedId}
+            List={List}
+            adults={adults}
+            infants={infants}
+            total={total}
+            onSetTotal={setTotal}
+          />
+          <button
+            className="bg-white text-sm font-semibold rounded-xl p-2 w-full mt-8  "
+            onClick={(e) => handleBooked(e)}
+          >
+            Book
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
 
-function FormHeadline({ onSetBookFlights }) {
+function FormHeadline({ onSetBookFlights, onSetIsOffline }) {
+  function handleClose() {
+    onSetBookFlights(false);
+    onSetIsOffline(false);
+  }
   return (
     <div className="flex  justify-between">
       <h3 className="font-medium  text-2xl mt-2 mb-4">
@@ -520,7 +568,7 @@ function FormHeadline({ onSetBookFlights }) {
       </h3>
       <button
         className="text-2xl font-bold  rounded-sm p-1"
-        onClick={() => onSetBookFlights(false)}
+        onClick={handleClose}
       >
         ✕
       </button>
@@ -569,21 +617,14 @@ function FormFields({ name, setName, phone, setPhone, isActive }) {
     </>
   );
 }
-function NumberOfPeople({
-  adults,
-  setAdults,
-  children,
-  setChildren,
-  infants,
-  setInfants,
-}) {
+function NumberOfPeople({ adults, setAdults, infants, setInfants }) {
   const numberOptions = Array.from({ length: 4 }, (_, i) => i);
   return (
     <>
-      <label className="block text-sm font-semibold mb-2 mt-2">
+      <label className="block text-sm font-semibold mb-5 mt-2">
         Number of Person:
       </label>
-      <div className="flex   text-sm font-semibold">
+      <div className="flex space-x-5  text-sm font-semibold">
         <div>
           <span>Adults: </span>
           <select
@@ -614,31 +655,43 @@ function NumberOfPeople({
   );
 }
 
-function TotalPrice() {
+function TotalPrice({ selectedId, List, adults, infants, onSetTotal }) {
+  const TargetItem = List.filter((items) => items.id === selectedId).map(
+    (v) => v.price,
+  );
+  console.log(TargetItem);
+  const totalAdultPrice = adults * TargetItem;
+  const totalInfants = infants > 0 && (infants * TargetItem) / 2;
+  const total = totalAdultPrice + totalInfants;
+  onSetTotal(total);
   return (
     <p className="mt-8 text-lg font-semibold">
-      Total: <span>$0</span>
+      Total: <span>${total}</span>
     </p>
   );
 }
 
-function NoSeatAlert({ onSetAlert }) {
+function NoSeatAlert({ setAlert }) {
   return (
-    <div className="p-10 w-[400px] bg-rose-500 h-[200px]  text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-lg ">
-      <p>Sorry, No Seats Available For This Flight</p>
-      <button
-        className="absolute top-2 right-3 text-2xl font-bold"
-        onClick={() => onSetAlert(false)}
-      >
-        ✕
-      </button>
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
+      <div className="flex justify-between bg-white p-6 rounded-lg shadow-xl max-w-md w-full">
+        <p className="text-red-500 font-medium text-lg">
+          Sorry, No Seats Available For This Flight !
+        </p>
+        <button
+          className="text-2xl font-semibold"
+          onClick={() => setAlert(false)}
+        >
+          ✕
+        </button>
+      </div>
     </div>
   );
 }
 
 function ErrorMessage() {
   return (
-    <div className="text-center bg-purple-600  w-1/2 h-[20vh] p-5 rounded-md text-white flex flex-col justify-items-center  ">
+    <div className=" text-center bg-purple-600  w-1/2 h-[20vh] p-5 rounded-md text-white flex flex-col justify-items-center  ">
       <h2 className="mx-auto text-3xl mb-2">
         <FaSadTear />
       </h2>
@@ -649,19 +702,6 @@ function ErrorMessage() {
 }
 
 function Contact() {
-  // <section>
-  //   <iframe
-  //     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d573.605992798156!2d62.20790490181604!3d34.347892703863046!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f3ce7001e9446d3%3A0x7180fb40c126c69c!2z2LTYsdqp2Kog2KrZiNix2LPYqtuMINiz24zYp9it2KrbjCDZiNiv2LHZhdin2YbbjCDYrNiy24zYsdmHINiz2YTYp9mF2Ko!5e0!3m2!1sfa!2s!4v1776580643805!5m2!1sfa!2s"
-  //     width=""
-  //     height="450"
-  //     style={{ border: 0 }}
-  //     allowFullScreen=""
-  //     loading="lazy"
-  //     referrerPolicy="no-referrer-when-downgrade"
-  //   ></iframe>
-  //   "
-  // </section>
-
   return (
     <section className="bg-white py-16 px-4 md:px-8">
       <div className="max-w-6xl mx-auto">
@@ -762,6 +802,82 @@ function Footer() {
         <p>
           <FaWhatsapp size={25} />
         </p>
+      </div>
+    </div>
+  );
+}
+function NetworkStatus({ isOnline }) {
+  return (
+    <div className="relative min-h-screen bg-slate-50 p-8 font-sans">
+      {!isOnline && (
+        <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-slate-900/70 backdrop-blur-lg transition-all duration-500">
+          <div className="bg-white p-10 rounded-3xl shadow-2xl text-center max-w-sm mx-4 border border-slate-100">
+            <div className="text-6xl mb-6 animate-bounce">📡</div>
+            <h2 className="text-2xl font-extrabold text-slate-800 mb-3">
+              Connection Lost
+            </h2>
+            <p className="text-slate-500 mb-8 leading-relaxed">
+              Oops! It seems you are offline. Please check your internet
+              connection to continue.
+            </p>
+
+            <div className="flex items-center justify-center gap-3 py-3 px-6 bg-blue-50 rounded-full text-blue-600 font-semibold text-sm">
+              <div className="w-5 h-5 border-3 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+              Retrying connection...
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function NetworkStartus2() {
+  return (
+    <div className="fixed top-5 left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-top-4 duration-300">
+      <div className="bg-white/80 backdrop-blur-md border border-red-100 shadow-lg shadow-red-200/50 px-5 py-3 rounded-2xl flex items-center gap-3">
+        <div className="relative flex h-3 w-3">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+        </div>
+
+        <div className="flex flex-col">
+          <p className="text-sm font-bold text-slate-800 leading-none mb-1">
+            Offline Mode
+          </p>
+          <p className="text-[11px] text-slate-500 leading-none">
+            Browsing limited. Check your connection.
+          </p>
+        </div>
+
+        <div className="h-8 w-[1px] bg-slate-200 mx-1"></div>
+
+        <button
+          onClick={() => window.location.reload()}
+          className="text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors"
+        >
+          Retry
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function Reservations() {
+  return (
+    <div className="absolute top-full mt-2 w-64 bg-white border border-gray-200 rounded-2xl shadow-2xl z-[100] overflow-hidden animate-in fade-in zoom-in duration-200 origin-top">
+      {/* بخش محتوا (اینجا هر چیزی خواستی قرار بده) */}
+      Hello
+      <div className="p-2 space-y-1">
+        {/* مثال برای یک سطر داخلی */}
+        <div className="w-full px-4 py-3 text-sm text-gray-700 hover:bg-purple-50 rounded-xl transition-all cursor-pointer flex items-center justify-between group">
+          <span>محتوای شما</span>
+          <span className="opacity-0 group-hover:opacity-100 transition-opacity">
+            →
+          </span>
+        </div>
+
+        {/* اینجا را با لیست روزهای خودت پر کن */}
       </div>
     </div>
   );
