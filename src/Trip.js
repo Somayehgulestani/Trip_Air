@@ -17,7 +17,7 @@ import {
   FaTelegram,
   FaWhatsapp,
 } from "react-icons/fa";
-import { useCheckNetwork } from "./useCheckNetwork";
+import { useCheckNetwork } from "./useCheckNetwork.js";
 // const flightsList = [
 //   {
 //     origin: "Herat",
@@ -159,7 +159,7 @@ export default function Trip() {
       <CityImages />
       <Contact />
       <Footer />
-      {/* <Reservations /> */}
+     
     </>
   );
 }
@@ -863,22 +863,3 @@ function NetworkStartus2() {
   );
 }
 
-function Reservations() {
-  return (
-    <div className="absolute top-full mt-2 w-64 bg-white border border-gray-200 rounded-2xl shadow-2xl z-[100] overflow-hidden animate-in fade-in zoom-in duration-200 origin-top">
-      {/* بخش محتوا (اینجا هر چیزی خواستی قرار بده) */}
-      Hello
-      <div className="p-2 space-y-1">
-        {/* مثال برای یک سطر داخلی */}
-        <div className="w-full px-4 py-3 text-sm text-gray-700 hover:bg-purple-50 rounded-xl transition-all cursor-pointer flex items-center justify-between group">
-          <span>محتوای شما</span>
-          <span className="opacity-0 group-hover:opacity-100 transition-opacity">
-            →
-          </span>
-        </div>
-
-        {/* اینجا را با لیست روزهای خودت پر کن */}
-      </div>
-    </div>
-  );
-}
